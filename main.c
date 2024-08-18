@@ -49,28 +49,44 @@ void liberaMatriz(int **vertices, int M) {
 
 int find(int x, int *visited) {
   if (visited[x] != x) {
-    printf("Visited[%d] - %d\n", x, visited[x]);
-    printf("X - %d\n", x);
     visited[x] = find(visited[x], visited);
   }
   return visited[x];
 }
 
+void imprimeVetorVisited(int *v, int N) {
+  for(int i = 1; i <= N; i++) {
+    printf("%d | ", v[i]);
+  }
+  printf("\n\n");
+}
+
 int contarComponentes(int N, int **vertices, int M) {
   int *visited = iniciaEPreencheVetorVisit(N);
+  int count = N;
 
   for (int i = 0; i < M; i++) {
+    printf("Vetor dos Visitados\n");
+    imprimeVetorVisited(visited, N);
     int root1 = find(vertices[i][0], visited);
     int root2 = find(vertices[i][1], visited);
     if (root1 != root2) {
       visited[root1] = root2;
-      N--;
+      count--;
+      printf("Vertices %d - %d | São adjacentes\n", root1, root2);
+      imprimeVetorVisited(visited, N);
+    } else {
+      printf("Vertices %d - %d | Não São adjacentes\n", root1, root2);
+
     }
+    printf("Há %d Componentes Conexos\n\n", count);
+    printf("*********************\n");
+    
   }
 
   free(visited);
 
-  return N;
+  return count;
 }
 
 int **leArquivo(char *arg, int *N, int* M) {
