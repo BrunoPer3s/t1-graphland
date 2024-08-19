@@ -16,8 +16,8 @@ int **iniciaMatriz(int M) {
     }
   }
 
-  for(int i = 0; i < M; i++) {
-    for(int j = 0; j < 2; j++) {
+  for (int i = 0; i < M; i++) {
+    for (int j = 0; j < 2; j++) {
       vertices[i][j] = 0;
     }
   }
@@ -55,7 +55,7 @@ int find(int x, int *visited) {
 }
 
 void imprimeVetorVisited(int *v, int N) {
-  for(int i = 1; i <= N; i++) {
+  for (int i = 1; i <= N; i++) {
     printf("%d | ", v[i]);
   }
   printf("\n\n");
@@ -77,11 +77,9 @@ int contarComponentes(int N, int **vertices, int M) {
       imprimeVetorVisited(visited, N);
     } else {
       printf("Vertices %d - %d | Não São adjacentes\n", root1, root2);
-
     }
     printf("Há %d Componentes Conexos\n\n", count);
     printf("*********************\n");
-    
   }
 
   free(visited);
@@ -89,7 +87,7 @@ int contarComponentes(int N, int **vertices, int M) {
   return count;
 }
 
-int **leArquivo(char *arg, int *N, int* M) {
+int **leArquivo(char *arg, int *N, int *M) {
   FILE *f = fopen(arg, "r");
 
   if (f == NULL) {
@@ -116,8 +114,6 @@ int **leArquivo(char *arg, int *N, int* M) {
   return vertices;
 }
 
-
-
 int main(int argc, char *argv[]) {
   int N = 0;
   int M = 0;
@@ -130,7 +126,7 @@ int main(int argc, char *argv[]) {
   }
 
   printf("*************\n");
-  
+
   int componentes = contarComponentes(N, vertices, M);
 
   liberaMatriz(vertices, M);
@@ -138,9 +134,8 @@ int main(int argc, char *argv[]) {
   if (componentes == 1) {
     printf("PROMESSA CUMPRIDA\n");
   } else {
-      printf("FALTAM %d ESTRADAS\n", componentes - 1);
+    printf("FALTAM %d ESTRADAS\n", componentes - 1);
   }
-
 
   return 0;
 }
